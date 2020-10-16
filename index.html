@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="assets/style.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- nav bar with 'view high scores' and timer -->
+    <header>
+        <a href="#">View high scores</a>
+        <span>Time: 0</span>
+    </header>
+
+    
+    <main class="main">
+        <!-- start page with button to start quiz-->
+        <div class="startPage">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit.<br>Keep in mind that incorrect answers will penalize your score/time<br>by ten seconds!</p>
+            <button class="startButton">Start Quiz</button>
+        </div>
+
+        <!-- quiz questions-->
+        <div id="quizQuestionDiv">
+            <p>Question</p>
+            <button id="option1">01.</button>
+            <button id="option2">02.</button>
+            <button id="option3">03.</button>
+            <button id="option4">04.</button>
+        </div>
+        <div>
+            <!-- correct or wrong display-->
+        </div>
+
+        <!-- end of quiz -->
+        <div id="endOfQuizDiv">
+            <h1>All done!</h1>
+            <p>User Score:</p>
+            <form>
+                <label>Enter initials:</label>
+                <input type="text">
+                <button>Submit</button>
+            </form>
+        </div>
+        
+    </main>
+
+    <script src="./assets/script.js"></script>
+</body>
+</html>

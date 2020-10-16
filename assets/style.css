@@ -1,0 +1,53 @@
+:root {
+    --primary-color: #2e0854;
+    --secondary-color: #d15fee;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: space-between;
+}
+header a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.startPage {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+}
+.startPage p {
+    line-height: 1.5;
+    font-size: 15px;
+}
+.startButton {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100px;
+    height: 35px;
+}
+.startButton:hover, .startButton:active {
+    background-color: var(--secondary-color);
+}
+
+#quizQuestionDiv {
+    display: none;
+}
+#endOfQuizDiv {
+    display: none;
+}
