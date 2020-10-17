@@ -45,9 +45,40 @@ header a {
     background-color: var(--secondary-color);
 }
 
-#quizQuestionDiv {
+#questionDiv {
     display: none;
 }
-#endOfQuizDiv {
+#endQuizDiv {
     display: none;
+}
+
+/* quiz div */
+.questionDiv {
+    flex-direction: column;
+    align-items: center;
+}
+/* question title */
+.questionTitle {
+
+}
+/* class for quiz choice buttons */
+.choiceButton {
+    display: block;
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 22px;
+    width: 300px;
+}
+
+.feedbackDiv {
+    align-self: flex-end;
+    border-top: 2px solid gray;
+}
+.feedback {
+    text-align: center;
+    color: gray;
+    font-style: italic;
+    font-size: 25px;
 }

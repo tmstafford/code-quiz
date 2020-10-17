@@ -13,32 +13,33 @@
     <!-- nav bar with 'view high scores' and timer -->
     <header>
         <a href="#">View high scores</a>
-        <span>Time: 0</span>
+        <span id="time">Time: 0</span>
     </header>
 
     
     <main class="main">
         <!-- start page with button to start quiz-->
-        <div class="startPage">
+        <div class="startPage" id="startPage">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit.<br>Keep in mind that incorrect answers will penalize your score/time<br>by ten seconds!</p>
-            <button class="startButton">Start Quiz</button>
+            <button class="startButton" id="startButton">Start Quiz</button>
         </div>
 
         <!-- quiz questions-->
-        <div id="quizQuestionDiv">
-            <p>Question</p>
-            <button id="option1">01.</button>
-            <button id="option2">02.</button>
-            <button id="option3">03.</button>
-            <button id="option4">04.</button>
+        <div id="questionDiv">
+            <h2 id="questionTitle">Question</h2>
+            <div id="questionChoices">
+
+            </div>
+
+            <div id="feedback" class="feedbackDiv">
+                <!-- correct or wrong display-->
+            </div>
         </div>
-        <div>
-            <!-- correct or wrong display-->
-        </div>
+        
 
         <!-- end of quiz -->
-        <div id="endOfQuizDiv">
+        <div id="endQuizDiv">
             <h1>All done!</h1>
             <p>User Score:</p>
             <form>
