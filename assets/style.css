@@ -54,6 +54,7 @@ header a {
 #highScoresDiv {
     display: none;
 }
+
 /* quiz div */
 .questionDiv {
     flex-direction: column;
@@ -73,14 +74,41 @@ header a {
     font-size: 22px;
     width: 300px;
 }
-
 .feedbackDiv {
-    align-self: flex-end;
+    align-items: flex-end;
     border-top: 2px solid gray;
+    width: 300px;
 }
 .feedback {
     text-align: center;
     color: gray;
     font-style: italic;
     font-size: 25px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.feedback {
+
+}
+
+
+.end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.highScores {
+    display: flex;
+    flex-direction: column;
+
+}
+.hsButtons {
+    display: inline-block;
+    padding: 10px;
+
 }

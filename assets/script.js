@@ -67,6 +67,8 @@ let startQuiz = function() {
     startTimer();
     startPageEl.style.display = "none";
     questionDivEl.style.display = "flex";
+    endQuizEl.style.display = "none";
+    highScoresDivEl.style.display = "none";
     generateQuestion();
 
 };
@@ -132,9 +134,11 @@ let endQuiz = function () {
 };
 
 let userHighScores = function() {
-    highScoresDivEl.style.display = "flex";
-    questionDivEl.style.display = "none";
+    clearInterval(timer);
+    highScoresDivEl.style.display = "block";
     endQuizEl.style.display = "none";
+    startPageEl.style.display = "none";
+    questionDivEl.style.display = "none";
 
     // enterInitialsEl.value and timeLeft saved in array to localStorage
     let newScore = {
@@ -160,6 +164,8 @@ let userHighScores = function() {
 let restartGame = function() {
     startPageEl.style.display = "flex";
     highScoresDivEl.style.display = "none";
+    questionDivEl.style.display = "none";
+    endQuizEl.style.display = "none";
 };
 
 let clearHighScores = function() {

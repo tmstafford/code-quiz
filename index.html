@@ -26,7 +26,7 @@
         </div>
 
         <!-- quiz questions-->
-        <div id="questionDiv">
+        <div id="questionDiv" class="container">
             <h2 id="questionTitle">Question</h2>
             <div id="questionChoices">
 
@@ -39,13 +39,13 @@
         
 
         <!-- end of quiz -->
-        <div id="endQuizDiv">
+        <div id="endQuizDiv" class="end">
             <h1>All done!</h1>
             <p id="finalScore"></p>
             <form>
                 <label>Enter initials:</label>
                 <input type="text" id="enterInitials">
-                <button id="submit" type="submit">Submit</button>
+                <button id="submitButton" class="startButton" type="submit">Submit</button>
             </form>
         </div>
 
@@ -56,9 +56,10 @@
                 <ol id="scoreContainer">
                 </ol>
             </div>
-            <button id="goBack">Go back</button>
-            <button id="clearScores">Clear high scores</button>
-
+            <div class="startButton hsButtons">
+                <button id="goBack">Go back</button>
+                <button id="clearScores">Clear high scores</button>
+            </div>
         </div>
         
     </main>
