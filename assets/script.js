@@ -39,12 +39,9 @@ let finalScoreEl = document.getElementById("finalScore");
 let enterInitialsEl = document.getElementById("enterInitials");
 let submitButtonEl = document.getElementById("submitButton");
 let highScoresDivEl = document.getElementById("highScoresDiv");
-let savedScoresEl = document.getElementById("savedScores");
 let goBackEl = document.getElementById("goBack");
 let clearScoresEl = document.getElementById("clearScores");
 let scoreContainerEl = document.getElementById("scoreContainer");
-
-
 
 let timeLeft = 75;
 let timer; 
@@ -57,10 +54,10 @@ let startTimer = function() {
         timeLeft--;
         timeEl.textContent = "Time: " + timeLeft;
 
-        if (timeLeft === 0) { // or no questions left
+        if (timeLeft === 0) { 
             timeEl.textContent = "Time: 0";
             clearInterval(timer);
-            // function to end game results
+            endQuiz();
         }
 
     }, 1000);
@@ -116,7 +113,12 @@ let nextQuestion = function() {
 
     questionIndex++;
 
-    generateQuestion();
+    if (questionIndex === quizQuestions.length) {
+        endQuiz();
+    }
+    else {
+        generateQuestion();
+    }
 };
 
 let endQuiz = function () {
@@ -129,7 +131,7 @@ let endQuiz = function () {
 
 };
 
-let highScores = function() {
+let userHighScores = function() {
     highScoresDivEl.style.display = "flex";
     questionDivEl.style.display = "none";
     endQuizEl.style.display = "none";
@@ -155,6 +157,20 @@ let highScores = function() {
     }
 };
 
+let restartGame = function() {
+    startPageEl.style.display = "flex";
+    highScoresDivEl.style.display = "none";
+};
+
+let clearHighScores = function() {
+    localStorage.setItem("scores", "");
+    restartGame();
+};
+
 startButtonEl.addEventListener("click", startQuiz);
+submitButtonEl.addEventListener("click", userHighScores);
+goBackEl.addEventListener("click", restartGame);
+clearScoresEl.addEventListener("click", clearHighScores);
+
 
 // once submit is pressed, save score function page will appear 
