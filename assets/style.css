@@ -51,7 +51,9 @@ header a {
 #endQuizDiv {
     display: none;
 }
-
+#highScoresDiv {
+    display: none;
+}
 /* quiz div */
 .questionDiv {
     flex-direction: column;

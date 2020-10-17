@@ -35,13 +35,22 @@ let questionTitleEl = document.getElementById("questionTitle");
 let questionChoicesEl = document.getElementById("questionChoices");
 let feedbackEl = document.getElementById("feedback");
 let endQuizEl = document.getElementById("endQuizDiv");
+let finalScoreEl = document.getElementById("finalScore");
+let enterInitialsEl = document.getElementById("enterInitials");
+let submitButtonEl = document.getElementById("submitButton");
+let highScoresDivEl = document.getElementById("highScoresDiv");
+let savedScoresEl = document.getElementById("savedScores");
+let goBackEl = document.getElementById("goBack");
+let clearScoresEl = document.getElementById("clearScores");
+let scoreContainerEl = document.getElementById("scoreContainer");
+
+
 
 let timeLeft = 75;
 let timer; 
 let questionIndex = 0;
 let currentQuestion = quizQuestions[questionIndex];
-let buttonID; 
-let buttonLoop = questionChoicesEl.querySelectorAll("button");
+let highScores = [];
 
 let startTimer = function() {
     timer = setInterval(function() {
@@ -110,5 +119,42 @@ let nextQuestion = function() {
     generateQuestion();
 };
 
+let endQuiz = function () {
+    clearInterval(timer);
+
+    questionDivEl.style.display = "none";
+    endQuizEl.style.display = "flex";
+
+    finalScoreEl.textContent = "Your final score is " + timeLeft + ".";
+
+};
+
+let highScores = function() {
+    highScoresDivEl.style.display = "flex";
+    questionDivEl.style.display = "none";
+    endQuizEl.style.display = "none";
+
+    // enterInitialsEl.value and timeLeft saved in array to localStorage
+    let newScore = {
+        userInits: enterInitialsEl.value,
+        userScore: timeLeft
+    };
+    highScores.push(newScore);
+    localStorage.setItem("scores", JSON.stringify(highScores));
+
+    let getScores = JSON.parse(localStorage.getItem("scores"));
+
+    if (getScores !== null) {
+        for (i = 0; i < getScores.length; i++) {
+            let scoreList = document.createElement("li");
+            scoreList.setAttribute("class", "scoreEntry");
+    
+            scoreList.innerHTML = getScores[i].userInits + " - " + getScores[i].userScore;
+            scoreContainerEl.appendChild(scoreList);
+        }
+    }
+};
 
 startButtonEl.addEventListener("click", startQuiz);
+
+// once submit is pressed, save score function page will appear 

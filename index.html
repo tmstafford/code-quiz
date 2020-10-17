@@ -41,12 +41,24 @@
         <!-- end of quiz -->
         <div id="endQuizDiv">
             <h1>All done!</h1>
-            <p>User Score:</p>
+            <p id="finalScore"></p>
             <form>
                 <label>Enter initials:</label>
-                <input type="text">
-                <button>Submit</button>
+                <input type="text" id="enterInitials">
+                <button id="submit" type="submit">Submit</button>
             </form>
+        </div>
+
+        <!-- high scores section -->
+        <div id="highScoresDiv">
+            <h2>High Scores</h2>
+            <div id="savedScores">
+                <ol id="scoreContainer">
+                </ol>
+            </div>
+            <button id="goBack">Go back</button>
+            <button id="clearScores">Clear high scores</button>
+
         </div>
         
     </main>
