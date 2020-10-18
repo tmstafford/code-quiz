@@ -18,7 +18,7 @@ var quizQuestions = [
     {
         title: "String values must be enclosed within _______ when being assigned to variables.",
         choices: ["commas", "curly brackets", "quotes", "parenthesis"],
-        answer: "parenthesis"
+        answer: "quotes"
     },
     {
         title: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -27,6 +27,9 @@ var quizQuestions = [
     },
 ];
 
+// global and DOM element variables 
+let mainEl = document.getElementById("main");
+let scoreLinkEl = document.getElementById("scoreLink");
 let startPageEl = document.getElementById("startPage");
 let startButtonEl = document.getElementById("startButton");
 let timeEl = document.getElementById("time");
@@ -38,17 +41,19 @@ let endQuizEl = document.getElementById("endQuizDiv");
 let finalScoreEl = document.getElementById("finalScore");
 let enterInitialsEl = document.getElementById("enterInitials");
 let submitButtonEl = document.getElementById("submitButton");
-let highScoresDivEl = document.getElementById("highScoresDiv");
-let goBackEl = document.getElementById("goBack");
-let clearScoresEl = document.getElementById("clearScores");
-let scoreContainerEl = document.getElementById("scoreContainer");
+
+let scoresDivEl = document.getElementById("scoresDiv");
+let scoreListEl = document.getElementById("scoreList");
+let goBackButton = document.getElementById("goBack");
+let clearScoresButton = document.getElementById("clearScores");
+
 
 let timeLeft = 75;
 let timer; 
 let questionIndex = 0;
 let currentQuestion = quizQuestions[questionIndex];
-let highScores = [];
 
+// function to start countdown timer 
 let startTimer = function() {
     timer = setInterval(function() {
         timeLeft--;
@@ -63,17 +68,16 @@ let startTimer = function() {
     }, 1000);
 };
 
+// function to start quiz 
 let startQuiz = function() {
     startTimer();
     startPageEl.style.display = "none";
     questionDivEl.style.display = "flex";
     endQuizEl.style.display = "none";
-    highScoresDivEl.style.display = "none";
     generateQuestion();
-
 };
 
-
+// function to go through question array and display questions 
 let generateQuestion = function() {
     let currentQuestion = quizQuestions[questionIndex];
     questionTitleEl = document.getElementById("questionTitle");
@@ -92,6 +96,7 @@ let generateQuestion = function() {
     });
 };
 
+// function to check right or wrong answers and go to next question 
 let nextQuestion = function() {
     let feedback = document.createElement("h2");
     feedback.setAttribute("class", "feedback");
@@ -123,7 +128,9 @@ let nextQuestion = function() {
     }
 };
 
+// function to end quiz and display final score 
 let endQuiz = function () {
+    timeEl.textContent = "Time: " + timeLeft;
     clearInterval(timer);
 
     questionDivEl.style.display = "none";
@@ -133,50 +140,58 @@ let endQuiz = function () {
 
 };
 
-let userHighScores = function() {
-    clearInterval(timer);
-    highScoresDivEl.style.display = "block";
-    endQuizEl.style.display = "none";
-    startPageEl.style.display = "none";
-    questionDivEl.style.display = "none";
+let highScores = [];
+let newScore;
+let newUserScore;
 
-    // enterInitialsEl.value and timeLeft saved in array to localStorage
+// function to save score to local storage and display to users 
+let saveScore = function() {
+    mainEl.innerHTML = "";
+    scoresDivEl.style.display = "flex";
+
+    let highScores = JSON.parse(localStorage.getItem("scores")) || [];
+
     let newScore = {
-        userInits: enterInitialsEl.value,
-        userScore: timeLeft
+        initials: enterInitialsEl.value,
+        score: timeLeft
     };
+    console.log(newScore);
     highScores.push(newScore);
     localStorage.setItem("scores", JSON.stringify(highScores));
 
-    let getScores = JSON.parse(localStorage.getItem("scores"));
+    for (i = 0; i < highScores.length; i++) {
+        let newUserScore = document.createElement("p");
+        newUserScore.setAttribute("class", "newUserScore");
+        newUserScore.textContent = highScores[i].initials + " - " + highScores[i].score;
+        scoreListEl.appendChild(newUserScore);
+    };
+}; 
 
-    if (getScores !== null) {
-        for (i = 0; i < getScores.length; i++) {
-            let scoreList = document.createElement("li");
-            scoreList.setAttribute("class", "scoreEntry");
-    
-            scoreList.innerHTML = getScores[i].userInits + " - " + getScores[i].userScore;
-            scoreContainerEl.appendChild(scoreList);
-        }
-    }
+// function to reset quiz 
+let restartQuiz = function() {
+    document.location.reload();
 };
 
-let restartGame = function() {
-    startPageEl.style.display = "flex";
-    highScoresDivEl.style.display = "none";
-    questionDivEl.style.display = "none";
-    endQuizEl.style.display = "none";
-};
-
+// function to clear all local storage and score list 
 let clearHighScores = function() {
-    localStorage.setItem("scores", "");
-    restartGame();
+    mainEl.innerHTML = "";
+    scoresDivEl.style.display = "flex";
+    scoreListEl.innerHTML = "";
+
+    localStorage.clear();
 };
 
+// function for link in header to see high scores page 
+// not displaying scores div for somereason 
+let showScoresLink = function() {
+    mainEl.innerHTML = "";
+    scoresDivEl.style.display = "flex";
+    console.log("what is happening");
+};
+
+// event listeners to run the quiz when buttons are clicked 
 startButtonEl.addEventListener("click", startQuiz);
-submitButtonEl.addEventListener("click", userHighScores);
-goBackEl.addEventListener("click", restartGame);
-clearScoresEl.addEventListener("click", clearHighScores);
-
-
-// once submit is pressed, save score function page will appear 
+submitButtonEl.addEventListener("click", saveScore);
+goBackButton.addEventListener("click", restartQuiz);
+clearScoresButton.addEventListener("click", clearHighScores);
+scoreLinkEl.addEventListener("click", showScoresLink);

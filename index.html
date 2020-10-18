@@ -5,19 +5,19 @@
     <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Code Quiz</title>
-    <link rel="stylesheet" href="assets/style.css" >
+    <link rel="stylesheet" href="./assets/style.css" >
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <!-- nav bar with 'view high scores' and timer -->
     <header>
-        <a href="#">View high scores</a>
-        <span id="time">Time: 0</span>
+        <a href="#" id="scoreLink">View high scores</a>
+        <span id="time">Time: 75</span>
     </header>
 
-    
-    <main class="main">
+    <main id="main">
+
         <!-- start page with button to start quiz-->
         <div class="startPage" id="startPage">
             <h1>Coding Quiz Challenge</h1>
@@ -36,7 +36,6 @@
                 <!-- correct or wrong display-->
             </div>
         </div>
-        
 
         <!-- end of quiz -->
         <div id="endQuizDiv" class="end">
@@ -48,21 +47,19 @@
                 <button id="submitButton" class="startButton" type="submit">Submit</button>
             </form>
         </div>
-
-        <!-- high scores section -->
-        <div id="highScoresDiv">
-            <h2>High Scores</h2>
-            <div id="savedScores">
-                <ol id="scoreContainer">
-                </ol>
-            </div>
-            <div class="startButton hsButtons">
-                <button id="goBack">Go back</button>
-                <button id="clearScores">Clear high scores</button>
-            </div>
-        </div>
-        
     </main>
+
+    <!-- high scores display -->
+    <div id="scoresDiv" class="scoresDiv">
+        <h2>High Scores</h2>
+        <div id="scoreList" class="scoreList">
+
+        </div>
+        <div class="endButtons">
+            <button id="goBack" class="goBack" type="button">Go Back</button>
+            <button id="clearScores" class="clearScores" type="button">Clear High Scores</button>
+        </div>
+    </div>
 
     <script src="./assets/script.js"></script>
 </body>

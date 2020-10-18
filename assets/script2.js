@@ -35,23 +35,29 @@ let questionTitleEl = document.getElementById("questionTitle");
 let questionChoicesEl = document.getElementById("questionChoices");
 let feedbackEl = document.getElementById("feedback");
 let endQuizEl = document.getElementById("endQuizDiv");
+let finalScoreEl = document.getElementById("finalScore");
+let enterInitialsEl = document.getElementById("enterInitials");
+let submitButtonEl = document.getElementById("submitButton");
+let highScoresDivEl = document.getElementById("highScoresDiv");
+let goBackEl = document.getElementById("goBack");
+let clearScoresEl = document.getElementById("clearScores");
+let scoreContainerEl = document.getElementById("scoreContainer");
 
 let timeLeft = 75;
 let timer; 
 let questionIndex = 0;
 let currentQuestion = quizQuestions[questionIndex];
-let buttonID; 
-let buttonLoop = questionChoicesEl.querySelectorAll("button");
+let allScores = [];
 
 let startTimer = function() {
     timer = setInterval(function() {
         timeLeft--;
         timeEl.textContent = "Time: " + timeLeft;
 
-        if (timeLeft === 0) { // or no questions left
+        if (timeLeft === 0) { 
             timeEl.textContent = "Time: 0";
             clearInterval(timer);
-            // function to end game results
+            endQuiz();
         }
 
     }, 1000);
@@ -61,6 +67,8 @@ let startQuiz = function() {
     startTimer();
     startPageEl.style.display = "none";
     questionDivEl.style.display = "flex";
+    endQuizEl.style.display = "none";
+    highScoresDivEl.style.display = "none";
     generateQuestion();
 
 };
@@ -107,8 +115,91 @@ let nextQuestion = function() {
 
     questionIndex++;
 
-    generateQuestion();
+    if (questionIndex === quizQuestions.length) {
+        endQuiz();
+    }
+    else {
+        generateQuestion();
+    }
 };
 
+let getScores = function() {
+    let newScore = {
+        userInits: enterInitialsEl.value,
+        userScore: timeLeft
+    };
+    console.log(newScore);
+    let allScores = localStorage.getItem("allScores");
+    if (allScores === null) {
+        allScores = [];
+    } else {
+        allScores = JSON.parse(allScores);
+    }
+    allScores.push(newScore);
+    let finalScore = JSON.stringify(allScores);
+    localStorage.setItem("allScores", finalScore);
+};
+
+let setScore = function() {
+    debugger;
+    highScoresDivEl.style.display = "block";
+    getScores();
+    let allScores = localStorage.getItem("allScores");
+    allScores = JSON.parse(allScores);
+
+    if (allScores !== null) {
+        for (i = 0; i < allScores.length; i++) {
+            let scoreList = document.createElement("li");
+            scoreList.setAttribute("class", "scoreEntry");
+            scoreList.textContent = allScores[i].userInits + " - " + allScores[i].userScore;
+            scoreContainerEl.appendChild(scoreList);
+        }
+    }
+};
+
+let endQuiz = function () {
+    clearInterval(timer);
+
+    startPageEl.style.display = "none";
+    questionDivEl.style.display = "none";
+    endQuizEl.style.display = "flex";
+
+    finalScoreEl.textContent = "Your final score is " + timeLeft + ".";
+
+};
+
+let finalScoreEl = document.getElementById("finalScore");
+let enterInitialsEl = document.getElementById("enterInitials");
+let submitButtonEl = document.getElementById("submitButton");
+let highScoresDivEl = document.getElementById("highScoresDiv");
+let goBackEl = document.getElementById("goBack");
+let clearScoresEl = document.getElementById("clearScores");
+let scoreContainerEl = document.getElementById("scoreContainer");
+let allScores = [];
+
+let scorePractice = function() {
+    let newScore
+}
+
+
+/*
+let restartGame = function() {
+    startPageEl.style.display = "flex";
+    highScoresDivEl.style.display = "none";
+    questionDivEl.style.display = "none";
+    endQuizEl.style.display = "none";
+};
+
+let clearHighScores = function() {
+    localStorage.setItem("scores", "");
+    restartGame();
+};
+*/ 
 
 startButtonEl.addEventListener("click", startQuiz);
+submitButtonEl.addEventListener("click", setScore);
+// goBackEl.addEventListener("click", restartGame);
+// clearScoresEl.addEventListener("click", clearHighScores);
+
+
+// once submit is pressed, save score function page will appear 

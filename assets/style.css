@@ -5,6 +5,7 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+/* header styles */ 
 header {
     display: flex;
     flex-wrap: wrap;
@@ -51,19 +52,15 @@ header a {
 #endQuizDiv {
     display: none;
 }
-#highScoresDiv {
+#scoresDiv {
     display: none;
 }
-
 /* quiz div */
 .questionDiv {
     flex-direction: column;
     align-items: center;
 }
-/* question title */
-.questionTitle {
 
-}
 /* class for quiz choice buttons */
 .choiceButton {
     display: block;
@@ -73,6 +70,9 @@ header a {
     border-radius: 10px;
     font-size: 22px;
     width: 300px;
+}
+.choiceButton:hover, .choiceButton:active {
+    background-color: var(--secondary-color);
 }
 .feedbackDiv {
     align-items: flex-end;
@@ -91,11 +91,6 @@ header a {
     align-items: center;
     text-align: center;
 }
-.feedback {
-
-}
-
-
 .end {
     display: flex;
     flex-direction: column;
@@ -105,10 +100,45 @@ header a {
 .highScores {
     display: flex;
     flex-direction: column;
-
 }
 .hsButtons {
     display: inline-block;
     padding: 10px;
-
+}
+.scoresDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.newUserScore {
+    width: 300px;
+    background-color: #d8bfd8;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+}
+.endButtons {
+    display: inline-block;
+    padding-top: 20px;
+}
+.goBack {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100px;
+    height: 35px;
+    margin-right: 20px;
+}
+.clearScores {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    height: 35px;
+    margin-left: 30px;
+}
+.goBack:hover, .goBack:active, .clearScores:hover, .clearScores:active {
+    background-color: var(--secondary-color);
 }
